@@ -70,7 +70,7 @@ function renderChart () {
   const ctx = document.getElementById('expense-chart').getContext('2d')
   if (chart) chart.destroy()
   chart = new Chart(ctx, {
-    type: 'pie',
+    type: 'bar',
     data: {
       labels: Object.keys(categories),
       datasets: [
