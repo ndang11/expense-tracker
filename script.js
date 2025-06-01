@@ -1,68 +1,3 @@
-// let expenses = [];
-// let totalAmount = 0;
-
-// const categorySelect = document.getElementById('category-select');
-// const amountInput = document.getElementById('amount-input');
-// const dateInput = document.getElementById('date-input');
-// const addBtn = document.getElementById('add-btn');
-// const expensesTableBody = document.getElementById('expense-table-body');
-// const totalAmountCell = document.getElementById('total-amount');
-
-// addBtn.addEventListener('click', function () {
-//   const category = categorySelect.value;
-//   const amount = Number(amountInput.value);
-//   const date = dateInput.value;
-
-//   if (category === '') {
-//     alert('Please select a category');
-//     return;
-//   }
-//   if (isNaN(amount) || amount <= 0) {
-//     alert('Please enter a valid amount');
-//     return;
-//   }
-//   if (date === '') {
-//     alert('Please select a date');
-//     return;
-//   }
-
-//   const expense = { category, amount, date };
-//   expenses.push(expense);
-
-//   totalAmount += amount;
-//   totalAmountCell.textContent = totalAmount.toFixed(2);
-
-//   const newRow = expensesTableBody.insertRow();
-//   const categoryCell = newRow.insertCell();
-//   const amountCell = newRow.insertCell();
-//   const dateCell = newRow.insertCell();
-//   const deleteCell = newRow.insertCell();
-
-//   categoryCell.textContent = category;
-//   amountCell.textContent = amount.toFixed(2);
-//   dateCell.textContent = date;
-
-//   const deleteBtn = document.createElement('button');
-//   deleteBtn.textContent = 'Delete';
-//   deleteBtn.classList.add('delete-btn');
-//   deleteCell.appendChild(deleteBtn);
-
-//   deleteBtn.addEventListener('click', function () {
-//     const index = expenses.indexOf(expense);
-//     if (index > -1) {
-//       expenses.splice(index, 1);
-//       totalAmount -= expense.amount;
-//       totalAmountCell.textContent = totalAmount.toFixed(2);
-//       expensesTableBody.removeChild(newRow);
-//     }
-//   });
-
-//   // Clear inputs after adding
-//   categorySelect.value = '';
-//   amountInput.value = '';
-//   dateInput.value = '';
-// });
-
 let expenses = [];
 let totalAmount = 0;
 let currentFilter = "all";
@@ -83,7 +18,7 @@ function renderTable() {
   expensesTableBody.innerHTML = "";
   totalAmount = 0;
 
-  const filteredExpenses = expenses.filter(exp => {
+  const filteredExpenses = expenses.filter((exp) => {
     if (currentFilter === "income") return exp.amount > 0;
     if (currentFilter === "expense") return exp.amount < 0;
     return true;
@@ -97,7 +32,9 @@ function renderTable() {
     const deleteCell = newRow.insertCell();
 
     categoryCell.textContent = expense.category;
-    amountCell.textContent = `${expense.amount > 0 ? "+" : "-"}$${Math.abs(expense.amount).toFixed(2)}`;
+    amountCell.textContent = `${expense.amount > 0 ? "+" : "-"}$${Math.abs(
+      expense.amount
+    ).toFixed(2)}`;
     amountCell.style.color = expense.amount >= 0 ? "green" : "red";
     dateCell.textContent = expense.date;
 
@@ -105,7 +42,7 @@ function renderTable() {
     deleteBtn.textContent = "Delete";
     deleteBtn.classList.add("delete-btn");
     deleteBtn.addEventListener("click", () => {
-      expenses = expenses.filter(e => e !== expense);
+      expenses = expenses.filter((e) => e !== expense);
       renderTable();
       renderChart();
     });
@@ -120,7 +57,11 @@ function renderTable() {
 function renderChart() {
   const categories = {};
   for (const exp of expenses) {
-    if (currentFilter !== "all" && ((currentFilter === "income" && exp.amount < 0) || (currentFilter === "expense" && exp.amount > 0))) {
+    if (
+      currentFilter !== "all" &&
+      ((currentFilter === "income" && exp.amount < 0) ||
+        (currentFilter === "expense" && exp.amount > 0))
+    ) {
       continue;
     }
     categories[exp.category] = (categories[exp.category] || 0) + exp.amount;
@@ -132,22 +73,26 @@ function renderChart() {
     type: "bar",
     data: {
       labels: Object.keys(categories),
-      datasets: [{
-        label: "Amount",
-        data: Object.values(categories),
-        backgroundColor: Object.values(categories).map(val => val >= 0 ? "green" : "red")
-      }]
+      datasets: [
+        {
+          label: "Amount",
+          data: Object.values(categories),
+          backgroundColor: Object.values(categories).map((val) =>
+            val >= 0 ? "green" : "red"
+          ),
+        },
+      ],
     },
     options: {
       plugins: {
-        legend: { display: false }
+        legend: { display: false },
       },
       scales: {
         y: {
-          beginAtZero: true
-        }
-      }
-    }
+          beginAtZero: true,
+        },
+      },
+    },
   });
 }
 
