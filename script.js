@@ -1,7 +1,7 @@
+let chart = null
 let expenses = []
 let totalAmount = 0
 let currentFilter = 'all'
-let chart = null
 
 const categorySelect = document.getElementById('category-select')
 const amountInput = document.getElementById('amount-input')
@@ -14,7 +14,7 @@ const filterAllBtn = document.getElementById('filter-all')
 const filterIncomeBtn = document.getElementById('filter-income')
 const filterExpenseBtn = document.getElementById('filter-expense')
 
-function renderTable() {
+function renderTable () {
   expensesTableBody.innerHTML = ''
   totalAmount = 0
 
@@ -40,7 +40,7 @@ function renderTable() {
 
     const deleteBtn = document.createElement('button')
     deleteBtn.textContent = 'Delete'
-    deleteBtn.classList.add('delete-btn');
+    deleteBtn.classList.add('delete-btn')
     deleteBtn.addEventListener('click', () => {
       expenses = expenses.filter((e) => e !== expense)
       renderTable()
@@ -54,7 +54,7 @@ function renderTable() {
   totalAmountCell.textContent = `$${totalAmount.toFixed(2)}`
 }
 
-function renderChart( ) {
+function renderChart () {
   const categories = {}
   for (const exp of expenses) {
     if (
@@ -67,10 +67,10 @@ function renderChart( ) {
     categories[exp.category] = (categories[exp.category] || 0) + exp.amount
   }
 
-  const ctx = document.getElementById('expense-chart').getContext('2d');
+  const ctx = document.getElementById('expense-chart').getContext('2d')
   if (chart) chart.destroy()
   chart = new Chart(ctx, {
-    type: 'bar',
+    type: 'pie',
     data: {
       labels: Object.keys(categories),
       datasets: [
