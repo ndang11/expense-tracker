@@ -71,18 +71,18 @@
 
   .filters button {
     margin-bottom: 20px;
-    padding: 10px 25px;
+    padding: 10px 20px;
   }
 
   .filters {
     display: flex;
     justify-content: flex-start;
-    gap: 1.5rem;
+    gap: 1rem;
   }
 
   table {
     border-collapse: collapse;
-    min-width: 100%;
+    min-width: 95%;
   }
 
   th,
