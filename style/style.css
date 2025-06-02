@@ -24,7 +24,7 @@
   h2 {
     text-align: center;
     margin-bottom: 25px;
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
 
   .input-section {
@@ -46,7 +46,7 @@
     padding: 8px 10px;
     border-radius: 5px;
     font-size: 1rem;
-    min-width: 100%;
+    min-width: 95%;
     font-weight: 500;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   }
@@ -65,7 +65,7 @@
   #add-btn {
     display: flex;
     justify-content: flex-end;
-    padding: 10px 30px;
+    padding: 10px 25px;
     font-size: 1rem;
   }
 
@@ -77,7 +77,7 @@
   .filters {
     display: flex;
     justify-content: flex-start;
-    gap: 1rem;
+    gap: 1.5rem;
   }
 
   table {
