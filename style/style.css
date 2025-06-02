@@ -55,11 +55,17 @@
     display: flex;
     justify-content: flex-end;
     padding: 10px 50px;
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
 
   .filters button {
     margin-bottom: 20px;
+    padding: 10px 30px;
+  }
+
+  .filters {
+    display: flex;
+    justify-content: space-evenly;
   }
 
   table {
