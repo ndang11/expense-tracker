@@ -1,3 +1,5 @@
+/* global Chart */
+
 let chart = null
 let expenses = []
 let totalAmount = 0
