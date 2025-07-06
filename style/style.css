@@ -111,8 +111,12 @@
 @media (min-width: 769px) {
   body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    margin: 80px;
+    background-color: #3a3434;
+  }
+
+  .container {
     background-color: rgb(242, 247, 245);
+    margin: 80px 60px;
   }
 
   h1,
@@ -180,6 +184,7 @@
   table {
     width: 100%;
     border-collapse: collapse;
+    padding-bottom: 40px;
   }
 
   th,
