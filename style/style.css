@@ -8,7 +8,7 @@
   body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     margin: 8px;
-    background-color: hsl(156deg, 24%, 96%);
+    background-color: #f2f7f5;
   }
 
   .logo {
@@ -115,7 +115,7 @@
   }
 
   .container {
-    background-color: hsl(156deg, 24%, 96%);
+    background-color: #f2f7f5;
     margin: 80px 60px;
   }
 
@@ -133,7 +133,7 @@
     padding: 1.5rem;
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 15px hsla(0, 0%, 0%, 8%);
+    box-shadow: 0 4px 15px #00000014;
     max-width: 600px;
     margin: 2rem auto;
   }
