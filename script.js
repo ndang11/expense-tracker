@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const filterIncomeBtn = document.getElementById('filter-income')
   const filterExpenseBtn = document.getElementById('filter-expense')
 
-  let transactions = []
+  const transactions = []
 
   const ctx = document.getElementById('expense-chart')?.getContext('2d')
   let chart = null
@@ -34,87 +34,96 @@ document.addEventListener('DOMContentLoaded', () => {
         responsive: true,
         plugins: { legend: { display: false } }
       }
-    });
+    })
   }
 
-  function updateChart() {
-    if (!chart) return;
-    const categories = transactions.map(t => t.category);
-    const amounts = transactions.map(t => t.amount);
-    const colors = transactions.map(t => t.type === 'income' ? '#4cd137' : '#e84118');
-    chart.data.labels = categories;
-    chart.data.datasets[0].data = amounts;
-    chart.data.datasets[0].backgroundColor = colors;
-    chart.update();
+  function updateChart () {
+    if (!chart) return
+    const categories = transactions.map(t => t.category)
+    const amounts = transactions.map(t => t.amount)
+    const colors = transactions.map(t => t.type === 'income' ? '#4cd137' : '#e84118')
+    chart.data.labels = categories
+    chart.data.datasets[0].data = amounts
+    chart.data.datasets[0].backgroundColor = colors
+    chart.update()
   }
 
-  function updateTable(filterType = 'all') {
-    if (!expenseTableBody) return;
-    expenseTableBody.innerHTML = '';
-    let totalExpense = 0;
-    let totalIncome = 0;
+  function updateTable (filterType = 'all') {
+    if (!expenseTableBody) return
+    expenseTableBody.innerHTML = ''
+    let totalExpense = 0
+    let totalIncome = 0
 
     transactions.forEach((t, index) => {
-      if (filterType !== "all" && t.type !== filterType) return;
-      const tr = document.createElement('tr');
+      if (filterType !== 'all' && t.type !== filterType) return
+      const tr = document.createElement('tr')
       tr.innerHTML = `
-        <td data-label="Type">${t.type}</td>
-        <td data-label="Category">${t.category}</td>
-        <td data-label="Amount">$${t.amount.toFixed(2)}</td>
-        <td data-label="Date">${t.date}</td>
-        <td data-label="Delete"><button onclick="deleteTransaction(${index})">Delete</button></td>
-      `;
-      expenseTableBody.appendChild(tr);
+        <td data-label='Type'>${t.type}</td>
+        <td data-label='Category'>${t.category}</td>
+        <td data-label='Amount'>$${t.amount.toFixed(2)}</td>
+        <td data-label='Date'>${t.date}</td>
+        <td data-label='Delete'><button onclick='deleteTransaction(${index})'>Delete</button></td>
+      `
+      expenseTableBody.appendChild(tr)
 
-      const typeCell = tr.querySelector('td[data-label="Type"]');
+      const typeCell = tr.querySelector('td[data-label="Type"]')
       if (typeCell) {
-        typeCell.style.color = t.type === 'income' ? '#4cd137' : '#e84118';
-        typeCell.style.fontWeight = '600';
+        typeCell.style.color = t.type === 'income' ? '#4cd137' : '#e84118'
+        typeCell.style.fontWeight = '600'
       }
 
-      if (t.type === 'income') totalIncome += t.amount;
-      else totalExpense += t.amount;
-    });
+      if (t.type === 'income') totalIncome += t.amount
+      else totalExpense += t.amount
+    })
 
-    if (totalExpenseEl) totalExpenseEl.textContent = `$${totalExpense.toFixed(2)}`;
-    if (totalIncomeEl) totalIncomeEl.textContent = `$${totalIncome.toFixed(2)}`;
-    if (totalBalanceEl) totalBalanceEl.textContent = `$${(totalIncome - totalExpense).toFixed(2)}`;
+    if (totalExpenseEl) totalExpenseEl.textContent = `$${totalExpense.toFixed(2)}`
+    if (totalIncomeEl) totalIncomeEl.textContent = `$${totalIncome.toFixed(2)}`
+    if (totalBalanceEl) totalBalanceEl.textContent = `$${(totalIncome - totalExpense).toFixed(2)}`
 
-    updateChart();
+    updateChart()
   }
 
-  function deleteTransaction(index) {
-    transactions.splice(index, 1);
-    updateTable();
+  function deleteTransaction (index) {
+    transactions.splice(index, 1)
+    updateTable()
   }
 
-  window.deleteTransaction = deleteTransaction;
+  window.deleteTransaction = deleteTransaction
 
   addBtn?.addEventListener('click', () => {
-    const category = categorySelect?.value;
-    const type = typeSelect?.value;
-    const amount = parseFloat(amountInput?.value);
-    const date = dateInput?.value;
+    const category = categorySelect?.value
+    const type = typeSelect?.value
+    const amount = parseFloat(amountInput?.value)
+    const date = dateInput?.value
 
     if (!category || !amount || !date || !type) {
-      alert('Please fill all fields!');
-      return;
+      alert('Please fill all fields!')
+      return
     }
 
-    transactions.push({ category, type, amount, date });
-    updateTable();
+    transactions.push({ category, type, amount, date })
+    updateTable()
 
-    if (categorySelect) categorySelect.value = '';
-    if (amountInput) amountInput.value = '';
-    if (dateInput) dateInput.value = '';
-  });
+    if (categorySelect) categorySelect.value = ''
+    if (amountInput) amountInput.value = ''
+    if (dateInput) dateInput.value = ''
+  })
 
-  function setActiveFilter(button) {
-    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-    button.classList.add('active');
+  function setActiveFilter (button) {
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'))
+    button.classList.add('active')
   }
 
-  filterAllBtn?.addEventListener('click', () => { updateTable('all'); setActiveFilter(filterAllBtn); });
-  filterIncomeBtn?.addEventListener('click', () => { updateTable('income'); setActiveFilter(filterIncomeBtn); });
-  filterExpenseBtn?.addEventListener('click', () => { updateTable('expense'); setActiveFilter(filterExpenseBtn); });
-});
+  filterAllBtn?.addEventListener('click', () => {
+    updateTable('all')
+    setActiveFilter(filterAllBtn)
+  })
+  filterIncomeBtn?.addEventListener('click', () => {
+    updateTable('income')
+    setActiveFilter(filterIncomeBtn)
+  })
+  filterExpenseBtn?.addEventListener('click', () => {
+    updateTable('expense')
+    setActiveFilter(filterExpenseBtn)
+  })
+})
