@@ -4,290 +4,220 @@
   box-sizing: border-box;
 }
 
-@media (min-width: 320px) {
-  body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    margin: 8px;
-    background-color: #f2f7f5;
-  }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f6fa;
+  margin: 0;
+  padding: 0;
+  color: #2f3640;
+}
 
-  .logo {
-    display: flex;
-    justify-content: center;
-  }
+.container {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+}
 
-  .container {
-    display: flex;
+.logo {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.logo img {
+  width: 80px;
+  height: auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #4a69bd;
+}
+
+.input-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.input-section div {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-section label {
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.input-section input,
+.input-section select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #dcdde1;
+  outline: none;
+  transition: 0.3s;
+}
+
+.input-section input:focus,
+.input-section select:focus {
+  border-color: #4a69bd;
+  box-shadow: 0 0 5px rgba(74, 105, 189, 0.5);
+}
+
+#add-btn {
+  background-color: #4a69bd;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  align-self: center;
+  transition: 0.3s;
+}
+
+#add-btn:hover {
+  background-color: #2f3c88;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.filters button {
+  background-color: #ffffff;
+  color: #4a69bd;
+  border: 2px solid #4a69bd;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.filters button:hover {
+  background-color: #4a69bd;
+  color: white;
+}
+
+#expense-chart {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto 40px auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.expenses-list {
+  max-width: 100%;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.expenses-list h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.expenses-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.expenses-list th,
+.expenses-list td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.expenses-list th {
+  background-color: #4a69bd;
+  color: white;
+  font-weight: 600;
+}
+
+.expenses-list tbody tr {
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s;
+}
+
+.expenses-list tbody tr:hover {
+  background-color: #f1f2f6;
+}
+
+.expenses-list tfoot td {
+  font-weight: 700;
+  background-color: #f1f2f6;
+}
+
+.expenses-list td button {
+  background-color: #e84118;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.expenses-list td button:hover {
+  background-color: #c23616;
+}
+
+@media (max-width: 768px) {
+  .input-section {
     flex-direction: column;
-  }
-
-  .logo img {
-    height: 250px;
-  }
-
-  h1,
-  h2 {
-    text-align: center;
-    margin-bottom: 25px;
-    font-size: 1.75rem;
-  }
-
-  .input-section {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    gap: 1rem;
-    padding: 1.5rem;
-    background: #fff;
-    border-radius: 12px;
-    max-width: 600px;
-    margin: 2rem auto;
-  }
-
-  .input-section label {
-    font-weight: bold;
-    padding-inline: 8px;
-    margin-top: 20px;
-  }
-
-  input,
-  select {
-    padding: 8px 10px;
-    border-radius: 5px;
-    font-size: 1rem;
-    min-width: 100%;
-    font-weight: 500;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  }
-
-  .category,
-  .date {
-    min-width: 100%;
-  }
-
-  button {
-    padding: 8px 10px;
-    display: flex;
-    margin-top: 20px;
-    background-color: #4caf50;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    color: #fff;
-  }
-
-  #add-btn {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    padding: 10px 25px;
-    font-size: 1rem;
-  }
-
-  .filters button {
-    margin-bottom: 20px;
-    padding: 10px 20px;
+    align-items: stretch;
   }
 
   .filters {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .expenses-list table, 
+  .expenses-list thead, 
+  .expenses-list tbody, 
+  .expenses-list th, 
+  .expenses-list td, 
+  .expenses-list tr {
+    display: block;
+  }
+
+  .expenses-list thead tr {
+    display: none;
+  }
+
+  .expenses-list tbody tr {
+    margin-bottom: 15px;
+    border-bottom: 2px solid #eee;
+    padding: 10px;
+  }
+
+  .expenses-list td {
     display: flex;
-    justify-content: center;
-    margin: 12px;
-    gap: 1rem;
+    justify-content: space-between;
+    padding: 10px 0;
   }
 
-  table {
-    border-collapse: collapse;
-    min-width: 95%;
-  }
-
-  th,
-  td {
-    border: 1px solid #c5c1c1;
-    padding-inline: 5px;
+  .expenses-list td::before {
+    content: attr(data-label);
     font-weight: 600;
-  }
-
-  th {
-    background-color: #4caf50;
-  }
-
-  tfoot td {
-    font-weight: bold;
-    background-color: #4caf50;
-    color: #fff;
-  }
-
-  .delete-btn {
-    cursor: pointer;
-    background-color: #f44336;
-  }
-}
-
-@media (min-width: 769px) {
-  body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #3a3434;
-  }
-
-  .container {
-    background-color: #f2f7f5;
-    margin: 80px 60px;
-    border-radius: 10px;
-  }
-
-  h1,
-  h2 {
-    text-align: center;
-    margin-bottom: 10px;
-  }
-
-  .input-section {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    gap: 1rem;
-    padding: 1.5rem;
-    background: #fff;
-    border-radius: 12px;
-    max-width: 600px;
-    margin: 2rem auto;
-  }
-
-  .input-section label {
-    font-weight: bold;
-  }
-
-  input,
-  select {
-    padding: 0.6rem 0.8rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    border-color: #4caf50;
-    transition: all 0.2s ease;
-  }
-
-  .input label {
-    font-size: 0.9rem;
-    color: #444;
-    margin-bottom: 0.4rem;
-  }
-
-  .category,
-  .date,
-  .amount {
-    min-width: 100%;
-  }
-
-  button {
-    padding: 5px 10px;
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  #add-btn {
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px 25px;
-    font-size: 0.85rem;
-  }
-
-  .expenses-list {
-    margin: 20px;
-  }
-
-  #expense-chart {
-    margin-top: 30px;
-  }
-
-  canvas {
-    height: 10vh;
-    width: 10vw;
-    margin: 20px 16px;
-  }
-
-  .filters button {
-    padding: 8px 16px;
-    cursor: pointer;
-    margin: 14px;
-  }
-
-  .filters {
-    display: flex;
-    justify-content: center;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    padding-bottom: 40px;
-  }
-
-  th,
-  td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-
-  th {
-    background-color: #4caf50;
-    color: #fff;
-  }
-
-  tfoot td {
-    font-weight: bold;
-  }
-
-  .delete-btn {
-    padding: 5px 10px;
-    background-color: #f44336;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-}
-
-@media (min-width: 600px) {
-  .input-section {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    gap: 1rem;
-    padding: 1.5rem;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px #00000014;
-    max-width: 600px;
-    margin: 2rem auto;
-  }
-
-  .category,
-  .date,
-  .amount {
-    min-width: 100%;
-  }
-
-  .filters {
-    display: flex;
-    justify-content: center;
-  }
-
-  #add-btn {
-    width: 95%;
-    justify-content: center;
-    color: #fff;
-    border: none;
-    padding: 0.7rem 1.4rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: all 0.25s ease;
+    flex-basis: 40%;
   }
 }
