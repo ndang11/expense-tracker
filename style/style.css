@@ -39,12 +39,11 @@ h1 {
   flex-wrap: wrap;
   gap: 15px;
   justify-content: center;
-  gap: 2rem;
   margin-bottom: 20px;
-  background-color: #ffffff;
+  background-color: #fff;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px #0000001a;
 }
 
 .input-section div {
@@ -69,7 +68,7 @@ h1 {
 .input-section input:focus,
 .input-section select:focus {
   border-color: #4a69bd;
-  box-shadow: 0 0 5px rgba(74, 105, 189, 0.5);
+  box-shadow: 0 0 5px #4a69bd80;
 }
 
 #add-btn {
@@ -118,20 +117,20 @@ h1 {
 #expense-chart {
   display: block;
   max-width: 100%;
-  margin: 0 auto 40px auto;
-  background-color: #ffffff;
+  margin: 0 auto 40px;
+  background-color: #fff;
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px #0000001a;
 }
 
 .expenses-list {
   max-width: 100%;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: #fff;
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px #0000001a;
 }
 
 .expenses-list h2 {
