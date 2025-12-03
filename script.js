@@ -1,135 +1,120 @@
 /* global Chart */
 
-let chart = null
-let expenses = []
-let totalAmount = 0
-let currentFilter = 'all'
+document.addEventListener('DOMContentLoaded', () => {
+  const categorySelect = document.getElementById('category-select')
+  const typeSelect = document.getElementById('type-select')
+  const amountInput = document.getElementById('amount-input')
+  const dateInput = document.getElementById('date-input')
+  const addBtn = document.getElementById('add-btn')
+  const expenseTableBody = document.getElementById('expense-table-body')
+  const totalExpenseEl = document.getElementById('total-expense')
+  const totalIncomeEl = document.getElementById('total-income')
+  const totalBalanceEl = document.getElementById('total-balance')
 
-const categorySelect = document.getElementById('category-select')
-const amountInput = document.getElementById('amount-input')
-const dateInput = document.getElementById('date-input')
-const addBtn = document.getElementById('add-btn')
-const expensesTableBody = document.getElementById('expense-table-body')
-const totalAmountCell = document.getElementById('total-amount')
+  const filterAllBtn = document.getElementById('filter-all')
+  const filterIncomeBtn = document.getElementById('filter-income')
+  const filterExpenseBtn = document.getElementById('filter-expense')
 
-const filterAllBtn = document.getElementById('filter-all')
-const filterIncomeBtn = document.getElementById('filter-income')
-const filterExpenseBtn = document.getElementById('filter-expense')
+  let transactions = []
 
-function renderTable () {
-  expensesTableBody.innerHTML = ''
-  totalAmount = 0
-
-  const filteredExpenses = expenses.filter((exp) => {
-    if (currentFilter === 'income') return exp.amount > 0
-    if (currentFilter === 'expense') return exp.amount < 0
-    return true
-  })
-
-  for (const expense of filteredExpenses) {
-    const newRow = expensesTableBody.insertRow()
-    const categoryCell = newRow.insertCell()
-    const amountCell = newRow.insertCell()
-    const dateCell = newRow.insertCell()
-    const deleteCell = newRow.insertCell()
-
-    categoryCell.textContent = expense.category
-    amountCell.textContent = `${expense.amount > 0 ? '+' : '-'}$${Math.abs(
-      expense.amount
-    ).toFixed(2)}`
-    amountCell.style.color = expense.amount >= 0 ? 'green' : 'red'
-    dateCell.textContent = expense.date
-
-    const deleteBtn = document.createElement('button')
-    deleteBtn.textContent = 'Delete'
-    deleteBtn.classList.add('delete-btn')
-    deleteBtn.addEventListener('click', () => {
-      expenses = expenses.filter((e) => e !== expense)
-      renderTable()
-      renderChart()
-    })
-
-    deleteCell.appendChild(deleteBtn)
-    totalAmount += expense.amount
-  }
-
-  totalAmountCell.textContent = `$${totalAmount.toFixed(2)}`
-}
-
-function renderChart () {
-  const categories = {}
-  for (const exp of expenses) {
-    if (
-      currentFilter !== 'all' &&
-      ((currentFilter === 'income' && exp.amount < 0) ||
-        (currentFilter === 'expense' && exp.amount > 0))
-    ) {
-      continue
-    }
-    categories[exp.category] = (categories[exp.category] || 0) + exp.amount
-  }
-
-  const ctx = document.getElementById('expense-chart').getContext('2d')
-  if (chart) chart.destroy()
-  chart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: Object.keys(categories),
-      datasets: [
-        {
+  const ctx = document.getElementById('expense-chart')?.getContext('2d')
+  let chart = null
+  if (ctx) {
+    chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [],
+        datasets: [{
           label: 'Amount',
-          data: Object.values(categories),
-          backgroundColor: Object.values(categories).map((val) =>
-            val >= 0 ? 'green' : 'red'
-          )
-        }
-      ]
-    },
-    options: {
-      plugins: {
-        legend: { display: false }
+          data: [],
+          backgroundColor: []
+        }]
       },
-      scales: {
-        y: {
-          beginAtZero: true
-        }
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } }
       }
-    }
-  })
-}
-
-addBtn.addEventListener('click', () => {
-  const category = categorySelect.value
-  const amount = parseFloat(amountInput.value)
-  const date = dateInput.value
-
-  if (!category || isNaN(amount) || !date) {
-    alert('Please fill out all fields with valid values.')
-    return
+    });
   }
 
-  expenses.push({ category, amount, date })
-  categorySelect.value = ''
-  amountInput.value = ''
-  dateInput.value = ''
+  function updateChart() {
+    if (!chart) return;
+    const categories = transactions.map(t => t.category);
+    const amounts = transactions.map(t => t.amount);
+    const colors = transactions.map(t => t.type === 'income' ? '#4cd137' : '#e84118');
+    chart.data.labels = categories;
+    chart.data.datasets[0].data = amounts;
+    chart.data.datasets[0].backgroundColor = colors;
+    chart.update();
+  }
 
-  renderTable()
-  renderChart()
-})
+  function updateTable(filterType = 'all') {
+    if (!expenseTableBody) return;
+    expenseTableBody.innerHTML = '';
+    let totalExpense = 0;
+    let totalIncome = 0;
 
-// Filter buttons
-filterAllBtn.addEventListener('click', () => {
-  currentFilter = 'all'
-  renderTable()
-  renderChart()
-})
-filterIncomeBtn.addEventListener('click', () => {
-  currentFilter = 'income'
-  renderTable()
-  renderChart()
-})
-filterExpenseBtn.addEventListener('click', () => {
-  currentFilter = 'expense'
-  renderTable()
-  renderChart()
-})
+    transactions.forEach((t, index) => {
+      if (filterType !== "all" && t.type !== filterType) return;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td data-label="Type">${t.type}</td>
+        <td data-label="Category">${t.category}</td>
+        <td data-label="Amount">$${t.amount.toFixed(2)}</td>
+        <td data-label="Date">${t.date}</td>
+        <td data-label="Delete"><button onclick="deleteTransaction(${index})">Delete</button></td>
+      `;
+      expenseTableBody.appendChild(tr);
+
+      const typeCell = tr.querySelector('td[data-label="Type"]');
+      if (typeCell) {
+        typeCell.style.color = t.type === 'income' ? '#4cd137' : '#e84118';
+        typeCell.style.fontWeight = '600';
+      }
+
+      if (t.type === 'income') totalIncome += t.amount;
+      else totalExpense += t.amount;
+    });
+
+    if (totalExpenseEl) totalExpenseEl.textContent = `$${totalExpense.toFixed(2)}`;
+    if (totalIncomeEl) totalIncomeEl.textContent = `$${totalIncome.toFixed(2)}`;
+    if (totalBalanceEl) totalBalanceEl.textContent = `$${(totalIncome - totalExpense).toFixed(2)}`;
+
+    updateChart();
+  }
+
+  function deleteTransaction(index) {
+    transactions.splice(index, 1);
+    updateTable();
+  }
+
+  window.deleteTransaction = deleteTransaction;
+
+  addBtn?.addEventListener('click', () => {
+    const category = categorySelect?.value;
+    const type = typeSelect?.value;
+    const amount = parseFloat(amountInput?.value);
+    const date = dateInput?.value;
+
+    if (!category || !amount || !date || !type) {
+      alert('Please fill all fields!');
+      return;
+    }
+
+    transactions.push({ category, type, amount, date });
+    updateTable();
+
+    if (categorySelect) categorySelect.value = '';
+    if (amountInput) amountInput.value = '';
+    if (dateInput) dateInput.value = '';
+  });
+
+  function setActiveFilter(button) {
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+  }
+
+  filterAllBtn?.addEventListener('click', () => { updateTable('all'); setActiveFilter(filterAllBtn); });
+  filterIncomeBtn?.addEventListener('click', () => { updateTable('income'); setActiveFilter(filterIncomeBtn); });
+  filterExpenseBtn?.addEventListener('click', () => { updateTable('expense'); setActiveFilter(filterExpenseBtn); });
+});

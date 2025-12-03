@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f5f6fa;
   margin: 0;
   padding: 0;
@@ -39,6 +39,7 @@ h1 {
   flex-wrap: wrap;
   gap: 15px;
   justify-content: center;
+  gap: 2rem;
   margin-bottom: 20px;
   background-color: #ffffff;
   padding: 20px;
@@ -79,6 +80,7 @@ h1 {
   padding: 10px 20px;
   cursor: pointer;
   align-self: center;
+  margin-top: 20px;
   transition: 0.3s;
 }
 
@@ -89,22 +91,26 @@ h1 {
 .filters {
   display: flex;
   justify-content: center;
-  gap: 15px;
-  margin: 20px 0;
+  gap: 10px;
+  margin-bottom: 30px;
 }
 
-.filters button {
-  background-color: #ffffff;
-  color: #4a69bd;
-  border: 2px solid #4a69bd;
+.filter-btn {
   padding: 8px 16px;
-  border-radius: 8px;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
+  background-color: #dcdde1;
   font-weight: 600;
   transition: 0.3s;
 }
 
-.filters button:hover {
+.filter-btn:hover {
+  background-color: #7f8fa6;
+  color: white;
+}
+
+.filter-btn.active {
   background-color: #4a69bd;
   color: white;
 }
@@ -190,11 +196,11 @@ h1 {
     gap: 10px;
   }
 
-  .expenses-list table, 
-  .expenses-list thead, 
-  .expenses-list tbody, 
-  .expenses-list th, 
-  .expenses-list td, 
+  .expenses-list table,
+  .expenses-list thead,
+  .expenses-list tbody,
+  .expenses-list th,
+  .expenses-list td,
   .expenses-list tr {
     display: block;
   }
