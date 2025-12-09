@@ -1,0 +1,16 @@
+Project Name : Expense Tracker App
+
+Project Description : Expense Tracker is an App were a user can keep track of his/her income and expenses, 
+It also has a date, a chart that shows the transaction time and the flow. when the use inputs the type either income or expense, selects category, amount and date and click on the add; 
+it then displays on the chart and on the transaction table.
+
+
+Project Technical :
+-HTML
+-Javascript
+-Css
+
+Author: NDANG-KAH A [Frontend Developer]
+
+GitHub: @ndang11
+LinkedIn: @ndang-ambei
