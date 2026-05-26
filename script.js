@@ -101,9 +101,15 @@ document.addEventListener('DOMContentLoaded', () => {
       return
     }
 
+    if (isNaN(amount) || amount <= 0) {
+      alert('Please enter a valid amount!')
+      return
+    }
+
     transactions.push({ category, type, amount, date })
     updateTable()
 
+    // Reset inputs
     if (categorySelect) categorySelect.value = ''
     if (amountInput) amountInput.value = ''
     if (dateInput) dateInput.value = ''
@@ -126,4 +132,13 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTable('expense')
     setActiveFilter(filterExpenseBtn)
   })
+
+  // Set default date to today if empty
+  if (dateInput && !dateInput.value) {
+    const today = new Date()
+    const yyyy = today.getFullYear()
+    const mm = String(today.getMonth() + 1).padStart(2, '0')
+    const dd = String(today.getDate()).padStart(2, '0')
+    dateInput.value = `${yyyy}-${mm}-${dd}`
+  }
 })

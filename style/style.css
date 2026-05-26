@@ -6,10 +6,11 @@
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5f6fa;
+  background: linear-gradient(135deg, #f5f6fa 0%, #e4e7f4 100%);
   margin: 0;
   padding: 0;
   color: #2f3640;
+  min-height: 100vh;
 }
 
 .container {
@@ -32,86 +33,165 @@ h1 {
   text-align: center;
   margin-bottom: 30px;
   color: #4a69bd;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px #0000001a;
 }
 
 .input-section {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  justify-content: center;
-  margin-bottom: 20px;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px #0000001a;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px #4a69bd26;
+  border: 1px solid #4a69bd1a;
 }
 
 .input-section div {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .input-section label {
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   font-weight: 600;
+  color: #4a69bd;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.input-section input,
 .input-section select {
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid #dcdde1;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 2px solid #dcdde1;
   outline: none;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  background-color: #fff;
+  font-size: 0.95rem;
+  color: #2f3640;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a69bd' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
 }
 
-.input-section input:focus,
+.input-section select:hover {
+  border-color: #4a69bd;
+  box-shadow: 0 0 0 3px #4a69bd1a;
+}
+
 .input-section select:focus {
   border-color: #4a69bd;
-  box-shadow: 0 0 5px #4a69bd80;
+  box-shadow: 0 0 0 4px #4a69bd1a;
+  transform: translateY(-1px);
+}
+
+.input-section input[type="number"] {
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 2px solid #dcdde1;
+  outline: none;
+  transition: all 0.3s ease;
+  background-color: #fff;
+  font-size: 0.95rem;
+}
+
+.input-section input[type="number"]:hover {
+  border-color: #4a69bd;
+}
+
+.input-section input[type="number"]:focus {
+  border-color: #4a69bd;
+  box-shadow: 0 0 0 4px #4a69bd1a;
+}
+
+.input-section input[type="date"] {
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 2px solid #dcdde1;
+  outline: none;
+  transition: all 0.3s ease;
+  background-color: #fff;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.input-section input[type="date"]:hover {
+  border-color: #4a69bd;
+}
+
+.input-section input[type="date"]:focus {
+  border-color: #4a69bd;
+  box-shadow: 0 0 0 4px #4a69bd1a;
 }
 
 #add-btn {
-  background-color: #4a69bd;
+  background: linear-gradient(135deg, #4a69bd 0%, #3c5aa6 100%);
   color: white;
   border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
+  border-radius: 10px;
+  padding: 12px 30px;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px #4a69bd4d;
   align-self: center;
-  margin-top: 20px;
-  transition: 0.3s;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 200px;
 }
 
 #add-btn:hover {
-  background-color: #2f3c88;
+  background: linear-gradient(135deg, #3c5aa6 0%, #2f4a9a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px #4a69bd66;
+}
+
+#add-btn:active {
+  transform: translateY(0);
 }
 
 .filters {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   margin-bottom: 30px;
+  flex-wrap: wrap;
 }
 
 .filter-btn {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
+  padding: 10px 20px;
+  border: 2px solid #dcdde1;
+  border-radius: 8px;
   cursor: pointer;
-  background-color: #dcdde1;
+  background-color: #fff;
   font-weight: 600;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  color: #4a69bd;
+  font-size: 0.9rem;
 }
 
 .filter-btn:hover {
-  background-color: #7f8fa6;
+  background-color: #4a69bd;
   color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px #4a69bd4d;
 }
 
 .filter-btn.active {
   background-color: #4a69bd;
   color: white;
+  border-color: #4a69bd;
+  box-shadow: 0 4px 10px #4a69bd4d;
 }
 
 #expense-chart {
@@ -119,89 +199,125 @@ h1 {
   max-width: 100%;
   margin: 0 auto 40px;
   background-color: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 10px #0000001a;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 8px 20px #0000001a;
+  border: 1px solid #0000000d;
 }
 
 .expenses-list {
   max-width: 100%;
   margin: 0 auto;
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 10px #0000001a;
+  background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 8px 20px #0000001a;
+  border: 1px solid #0000000d;
 }
 
 .expenses-list h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   color: #333;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .expenses-list table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-.expenses-list th,
-.expenses-list td {
-  padding: 12px 15px;
-  text-align: left;
+.expenses-list thead {
+  background: linear-gradient(135deg, #4a69bd 0%, #3c5aa6 100%);
+  color: white;
 }
 
 .expenses-list th {
-  background-color: #4a69bd;
-  color: white;
+  padding: 15px;
+  text-align: left;
   font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .expenses-list tbody tr {
-  border-bottom: 1px solid #ddd;
-  transition: background-color 0.3s;
+  border-bottom: 1px solid #eee;
+  transition: all 0.3s ease;
 }
 
 .expenses-list tbody tr:hover {
-  background-color: #f1f2f6;
+  background-color: #f8f9fa;
+  transform: scale(1.005);
 }
 
 .expenses-list tfoot td {
   font-weight: 700;
-  background-color: #f1f2f6;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-top: 2px solid #4a69bd;
+}
+
+.expenses-list td {
+  padding: 15px;
+  font-size: 0.95rem;
 }
 
 .expenses-list td button {
-  background-color: #e84118;
+  background: linear-gradient(135deg, #e84118 0%, #c23616 100%);
   color: white;
   border: none;
-  padding: 6px 10px;
+  padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 0.85rem;
 }
 
 .expenses-list td button:hover {
-  background-color: #c23616;
+  background: linear-gradient(135deg, #c23616 0%, #a02d12 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px #e841184d;
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
+  .container {
+    padding: 15px;
+    margin: 10px auto;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+    margin-bottom: 20px;
+  }
+
   .input-section {
-    flex-direction: column;
-    align-items: stretch;
+    grid-template-columns: 1fr;
+    padding: 20px;
+    gap: 15px;
   }
 
   .filters {
-    flex-direction: column;
-    gap: 10px;
+    gap: 8px;
   }
 
-  .expenses-list table,
-  .expenses-list thead,
-  .expenses-list tbody,
-  .expenses-list th,
-  .expenses-list td,
-  .expenses-list tr {
-    display: block;
+  .filter-btn {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+
+  #expense-chart, .expenses-list {
+    padding: 20px;
+  }
+
+  .expenses-list table {
+    border-radius: 0;
   }
 
   .expenses-list thead tr {
@@ -211,18 +327,28 @@ h1 {
   .expenses-list tbody tr {
     margin-bottom: 15px;
     border-bottom: 2px solid #eee;
-    padding: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    background: white;
   }
 
   .expenses-list td {
     display: flex;
     justify-content: space-between;
-    padding: 10px 0;
+    padding: 12px 0;
+    flex-wrap: wrap;
   }
 
   .expenses-list td::before {
     content: attr(data-label);
     font-weight: 600;
-    flex-basis: 40%;
+    flex-basis: 100%;
+    color: #4a69bd;
+    margin-bottom: 4px;
+  }
+
+  #add-btn {
+    width: 100%;
+    max-width: none;
   }
 }
