@@ -42,7 +42,6 @@ h1 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
-  justify-items: center;
   margin-bottom: 30px;
   background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
   padding: 25px;
@@ -51,10 +50,14 @@ h1 {
   border: 1px solid #4a69bd1a;
 }
 
-.input-section div {
+.input-section > div {
   display: flex;
   flex-direction: column;
-  width: 100%;
+}
+
+.input-section > #add-btn {
+  grid-column: 1 / -1;
+  justify-self: center;
 }
 
 .input-section label {
@@ -133,6 +136,28 @@ h1 {
   box-shadow: 0 0 0 4px #4a69bd1a;
 }
 
+#category-select {
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 2px solid #dcdde1;
+  outline: none;
+  transition: all 0.3s ease;
+  background-color: #fff;
+  font-size: 0.95rem;
+  color: #2f3640;
+}
+
+#category-select:hover {
+  border-color: #4a69bd;
+  box-shadow: 0 0 0 3px #4a69bd1a;
+}
+
+#category-select:focus {
+  border-color: #4a69bd;
+  box-shadow: 0 0 0 4px #4a69bd1a;
+  transform: translateY(-1px);
+}
+
 #add-btn {
   background: linear-gradient(135deg, #4a69bd 0%, #3c5aa6 100%);
   color: white;
@@ -144,10 +169,7 @@ h1 {
   font-size: 1rem;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px #4a69bd4d;
-  align-self: center;
   margin-top: 10px;
-  width: 100%;
-  max-width: 200px;
 }
 
 #add-btn:hover {
@@ -325,18 +347,37 @@ h1 {
   }
 
   .expenses-list tbody tr {
+    display: block;
     margin-bottom: 15px;
-    border-bottom: 2px solid #eee;
+    border: 1px solid #ddd;
     padding: 15px;
     border-radius: 10px;
     background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .expenses-list tbody tr:last-child {
+    margin-bottom: 0;
   }
 
   .expenses-list td {
     display: flex;
     justify-content: space-between;
-    padding: 12px 0;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
     flex-wrap: wrap;
+  }
+
+  .expenses-list td:last-child {
+    border-bottom: none;
+    padding: 12px 0 0;
+    justify-content: flex-end;
+  }
+
+  .expenses-list td button {
+    padding: 6px 12px;
+    font-size: 0.8rem;
   }
 
   .expenses-list td::before {
