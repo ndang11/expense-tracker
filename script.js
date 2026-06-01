@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const filterIncomeBtn = document.getElementById('filter-income')
   const filterExpenseBtn = document.getElementById('filter-expense')
 
-  const transactions = []
+  const transactions = JSON.parse(localStorage.getItem('transactions') || '[]')
 
   const ctx = document.getElementById('expense-chart')?.getContext('2d')
   let chart = null
@@ -37,6 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
+  updateTable()
+
   function updateChart () {
     if (!chart) return
     const categories = transactions.map(t => t.category)
@@ -46,6 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
     chart.data.datasets[0].data = amounts
     chart.data.datasets[0].backgroundColor = colors
     chart.update()
+  }
+
+  function saveTransactions () {
+    localStorage.setItem('transactions', JSON.stringify(transactions))
   }
 
   function updateTable (filterType = 'all') {
@@ -85,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function deleteTransaction (index) {
     transactions.splice(index, 1)
+    saveTransactions()
     updateTable()
   }
 
@@ -107,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     transactions.push({ category, type, amount, date })
+    saveTransactions()
     updateTable()
 
     // Reset inputs
