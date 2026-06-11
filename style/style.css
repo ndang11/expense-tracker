@@ -136,7 +136,8 @@ h1 {
   box-shadow: 0 0 0 4px #4a69bd1a;
 }
 
-#category-select {
+#category-select,
+#description-input {
   padding: 12px 15px;
   border-radius: 10px;
   border: 2px solid #dcdde1;
@@ -147,12 +148,14 @@ h1 {
   color: #2f3640;
 }
 
-#category-select:hover {
+#category-select:hover,
+#description-input:hover {
   border-color: #4a69bd;
   box-shadow: 0 0 0 3px #4a69bd1a;
 }
 
-#category-select:focus {
+#category-select:focus,
+#description-input:focus {
   border-color: #4a69bd;
   box-shadow: 0 0 0 4px #4a69bd1a;
   transform: translateY(-1px);
@@ -391,5 +394,44 @@ h1 {
   #add-btn {
     width: 100%;
     max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+  }
+
+  .input-section {
+    padding: 15px;
+    gap: 12px;
+  }
+
+  .input-section label {
+    font-size: 0.8rem;
+  }
+
+  .input-section input,
+  .input-section select {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  #add-btn {
+    padding: 10px 20px;
+  }
+
+  #expense-chart, .expenses-list {
+    padding: 15px;
+  }
+
+  .expenses-list h2 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
   }
 }

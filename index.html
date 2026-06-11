@@ -31,6 +31,11 @@
           <input type="text" id="category-select" placeholder="Enter category" />
         </div>
 
+        <div class="description">
+          <label for="description-input">Description:</label>
+          <input type="text" id="description-input" placeholder="Enter description" />
+        </div>
+
         <div class="amount">
           <label for="amount-input">Amount:</label>
           <input type="number" id="amount-input" placeholder="Enter amount" />
@@ -59,6 +64,7 @@
             <tr>
               <th>Type</th>
               <th>Category</th>
+              <th>Description</th>
               <th>Amount</th>
               <th>Date</th>
               <th>Delete</th>
@@ -67,17 +73,17 @@
           <tbody id="expense-table-body"></tbody>
           <tfoot>
             <tr>
-              <td colspan="2">Total Expense</td>
+              <td colspan="3">Total Expense</td>
               <td id="total-expense"></td>
               <td colspan="2"></td>
             </tr>
             <tr>
-              <td colspan="2">Total Income</td>
+              <td colspan="3">Total Income</td>
               <td id="total-income"></td>
               <td colspan="2"></td>
             </tr>
             <tr>
-              <td colspan="2">Balance</td>
+              <td colspan="3">Balance</td>
               <td id="total-balance"></td>
               <td colspan="2"></td>
             </tr>

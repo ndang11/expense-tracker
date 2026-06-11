@@ -2,6 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   const categorySelect = document.getElementById('category-select')
+  const descriptionInput = document.getElementById('description-input')
   const typeSelect = document.getElementById('type-select')
   const amountInput = document.getElementById('amount-input')
   const dateInput = document.getElementById('date-input')
@@ -66,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tr.innerHTML = `
         <td data-label='Type'>${t.type}</td>
         <td data-label='Category'>${t.category}</td>
+        <td data-label='Description'>${t.description}</td>
         <td data-label='Amount'>$${t.amount.toFixed(2)}</td>
         <td data-label='Date'>${t.date}</td>
         <td data-label='Delete'><button onclick='deleteTransaction(${index})'>Delete</button></td>
@@ -99,11 +101,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   addBtn?.addEventListener('click', () => {
     const category = categorySelect?.value
+    const description = descriptionInput?.value
     const type = typeSelect?.value
     const amount = parseFloat(amountInput?.value)
     const date = dateInput?.value
 
-    if (!category || !amount || !date || !type) {
+    if (!category || !description || !amount || !date || !type) {
       alert('Please fill all fields!')
       return
     }
@@ -113,12 +116,13 @@ document.addEventListener('DOMContentLoaded', () => {
       return
     }
 
-    transactions.push({ category, type, amount, date })
+    transactions.push({ category, description, type, amount, date })
     saveTransactions()
     updateTable()
 
     // Reset inputs
     if (categorySelect) categorySelect.value = ''
+    if (descriptionInput) descriptionInput.value = ''
     if (amountInput) amountInput.value = ''
     if (dateInput) dateInput.value = ''
   })
@@ -141,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setActiveFilter(filterExpenseBtn)
   })
 
-  // Set default date to today if empty
   if (dateInput && !dateInput.value) {
     const today = new Date()
     const yyyy = today.getFullYear()
