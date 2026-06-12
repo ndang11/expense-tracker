@@ -1,7 +1,7 @@
 /* global Chart */
 
 document.addEventListener('DOMContentLoaded', () => {
-  const categorySelect = document.getElementById('category-select')
+  const categoryInput = document.getElementById('category-input')
   const descriptionInput = document.getElementById('description-input')
   const typeSelect = document.getElementById('type-select')
   const amountInput = document.getElementById('amount-input')
@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const totalExpenseEl = document.getElementById('total-expense')
   const totalIncomeEl = document.getElementById('total-income')
   const totalBalanceEl = document.getElementById('total-balance')
+
+  let currentFilter = 'all'
 
   const filterAllBtn = document.getElementById('filter-all')
   const filterIncomeBtn = document.getElementById('filter-income')
@@ -42,9 +44,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateChart () {
     if (!chart) return
-    const categories = transactions.map(t => t.category)
-    const amounts = transactions.map(t => t.amount)
-    const colors = transactions.map(t => t.type === 'income' ? '#4cd137' : '#e84118')
+    
+    const aggregatedData = {}
+    transactions.forEach(t => {
+      if (currentFilter !== 'all' && t.type !== currentFilter) return
+      if (!aggregatedData[t.category]) {
+        aggregatedData[t.category] = { amount: 0, type: t.type }
+      }
+      aggregatedData[t.category].amount += t.amount
+    })
+    
+    const categories = Object.keys(aggregatedData)
+    const amounts = categories.map(c => aggregatedData[c].amount)
+    const colors = categories.map(c => aggregatedData[c].type === 'income' ? '#4cd137' : '#e84118')
+    
     chart.data.labels = categories
     chart.data.datasets[0].data = amounts
     chart.data.datasets[0].backgroundColor = colors
@@ -55,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('transactions', JSON.stringify(transactions))
   }
 
-  function updateTable (filterType = 'all') {
+  function updateTable (filterType = currentFilter) {
     if (!expenseTableBody) return
     expenseTableBody.innerHTML = ''
     let totalExpense = 0
@@ -64,21 +77,44 @@ document.addEventListener('DOMContentLoaded', () => {
     transactions.forEach((t, index) => {
       if (filterType !== 'all' && t.type !== filterType) return
       const tr = document.createElement('tr')
-      tr.innerHTML = `
-        <td data-label='Type'>${t.type}</td>
-        <td data-label='Category'>${t.category}</td>
-        <td data-label='Description'>${t.description}</td>
-        <td data-label='Amount'>$${t.amount.toFixed(2)}</td>
-        <td data-label='Date'>${t.date}</td>
-        <td data-label='Delete'><button onclick='deleteTransaction(${index})'>Delete</button></td>
-      `
-      expenseTableBody.appendChild(tr)
+      
+      const tdType = document.createElement('td')
+      tdType.setAttribute('data-label', 'Type')
+      tdType.textContent = t.type
+      tdType.style.color = t.type === 'income' ? '#4cd137' : '#e84118'
+      tdType.style.fontWeight = '600'
+      
+      const tdCategory = document.createElement('td')
+      tdCategory.setAttribute('data-label', 'Category')
+      tdCategory.textContent = t.category
+      
+      const tdDescription = document.createElement('td')
+      tdDescription.setAttribute('data-label', 'Description')
+      tdDescription.textContent = t.description
+      
+      const tdAmount = document.createElement('td')
+      tdAmount.setAttribute('data-label', 'Amount')
+      tdAmount.textContent = `$${t.amount.toFixed(2)}`
+      
+      const tdDate = document.createElement('td')
+      tdDate.setAttribute('data-label', 'Date')
+      tdDate.textContent = t.date
+      
+      const tdDelete = document.createElement('td')
+      tdDelete.setAttribute('data-label', 'Delete')
+      const deleteBtn = document.createElement('button')
+      deleteBtn.textContent = 'Delete'
+      deleteBtn.onclick = () => deleteTransaction(index)
+      tdDelete.appendChild(deleteBtn)
+      
+      tr.appendChild(tdType)
+      tr.appendChild(tdCategory)
+      tr.appendChild(tdDescription)
+      tr.appendChild(tdAmount)
+      tr.appendChild(tdDate)
+      tr.appendChild(tdDelete)
 
-      const typeCell = tr.querySelector('td[data-label="Type"]')
-      if (typeCell) {
-        typeCell.style.color = t.type === 'income' ? '#4cd137' : '#e84118'
-        typeCell.style.fontWeight = '600'
-      }
+      expenseTableBody.appendChild(tr)
 
       if (t.type === 'income') totalIncome += t.amount
       else totalExpense += t.amount
@@ -100,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.deleteTransaction = deleteTransaction
 
   addBtn?.addEventListener('click', () => {
-    const category = categorySelect?.value
+    const category = categoryInput?.value
     const description = descriptionInput?.value
     const type = typeSelect?.value
     const amount = parseFloat(amountInput?.value)
@@ -121,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTable()
 
     // Reset inputs
-    if (categorySelect) categorySelect.value = ''
+    if (categoryInput) categoryInput.value = ''
     if (descriptionInput) descriptionInput.value = ''
     if (amountInput) amountInput.value = ''
     if (dateInput) dateInput.value = ''
@@ -133,14 +169,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   filterAllBtn?.addEventListener('click', () => {
+    currentFilter = 'all'
     updateTable('all')
     setActiveFilter(filterAllBtn)
   })
   filterIncomeBtn?.addEventListener('click', () => {
+    currentFilter = 'income'
     updateTable('income')
     setActiveFilter(filterIncomeBtn)
   })
   filterExpenseBtn?.addEventListener('click', () => {
+    currentFilter = 'expense'
     updateTable('expense')
     setActiveFilter(filterExpenseBtn)
   })

@@ -13,7 +13,7 @@ Many individuals struggle to manage their personal finances effectively, often l
 - Allow users to add expenses and income
 - Categorize transactions for better organization
 - Display total expenses, income, and balance
-- Show expense categories in a pie chart
+- Show expense categories in a bar chart
 - Provide filtering options (all, income, expense)
 - Store data in the browser (localStorage) for persistence
 
@@ -36,7 +36,7 @@ Many individuals struggle to manage their personal finances effectively, often l
 - Add transactions with type (expense/income), category, amount, and date
 - View all transactions in a table
 - See running totals for expenses, income, and balance
-- Visualize expense distribution with a pie chart
+- Visualize expense distribution with a bar chart
 - Filter transactions by type (all, income, expense)
 - Delete transactions
 - Responsive design for mobile and desktop
