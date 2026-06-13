@@ -136,7 +136,7 @@ h1 {
   box-shadow: 0 0 0 4px #4a69bd1a;
 }
 
-#category-select,
+#category-input,
 #description-input {
   padding: 12px 15px;
   border-radius: 10px;
@@ -148,13 +148,13 @@ h1 {
   color: #2f3640;
 }
 
-#category-select:hover,
+#category-input:hover,
 #description-input:hover {
   border-color: #4a69bd;
   box-shadow: 0 0 0 3px #4a69bd1a;
 }
 
-#category-select:focus,
+#category-input:focus,
 #description-input:focus {
   border-color: #4a69bd;
   box-shadow: 0 0 0 4px #4a69bd1a;

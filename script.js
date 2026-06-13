@@ -48,10 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const aggregatedData = {}
     transactions.forEach(t => {
       if (currentFilter !== 'all' && t.type !== currentFilter) return
-      if (!aggregatedData[t.category]) {
-        aggregatedData[t.category] = { amount: 0, type: t.type }
+      const key = `${t.category} (${t.type})`
+      if (!aggregatedData[key]) {
+        aggregatedData[key] = { amount: 0, type: t.type }
       }
-      aggregatedData[t.category].amount += t.amount
+      aggregatedData[key].amount += t.amount
     })
     
     const categories = Object.keys(aggregatedData)
