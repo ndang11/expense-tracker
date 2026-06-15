@@ -1,4 +1,4 @@
-/* global Chart */
+/* global Chart, localStorage, alert */
 
 document.addEventListener('DOMContentLoaded', () => {
   const categoryInput = document.getElementById('category-input')
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateChart () {
     if (!chart) return
-    
+
     const aggregatedData = {}
     transactions.forEach(t => {
       if (currentFilter !== 'all' && t.type !== currentFilter) return
@@ -54,11 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       aggregatedData[key].amount += t.amount
     })
-    
+
     const categories = Object.keys(aggregatedData)
     const amounts = categories.map(c => aggregatedData[c].amount)
     const colors = categories.map(c => aggregatedData[c].type === 'income' ? '#4cd137' : '#e84118')
-    
+
     chart.data.labels = categories
     chart.data.datasets[0].data = amounts
     chart.data.datasets[0].backgroundColor = colors
@@ -78,36 +78,36 @@ document.addEventListener('DOMContentLoaded', () => {
     transactions.forEach((t, index) => {
       if (filterType !== 'all' && t.type !== filterType) return
       const tr = document.createElement('tr')
-      
+
       const tdType = document.createElement('td')
       tdType.setAttribute('data-label', 'Type')
       tdType.textContent = t.type
       tdType.style.color = t.type === 'income' ? '#4cd137' : '#e84118'
       tdType.style.fontWeight = '600'
-      
+
       const tdCategory = document.createElement('td')
       tdCategory.setAttribute('data-label', 'Category')
       tdCategory.textContent = t.category
-      
+
       const tdDescription = document.createElement('td')
       tdDescription.setAttribute('data-label', 'Description')
       tdDescription.textContent = t.description
-      
+
       const tdAmount = document.createElement('td')
       tdAmount.setAttribute('data-label', 'Amount')
       tdAmount.textContent = `$${t.amount.toFixed(2)}`
-      
+
       const tdDate = document.createElement('td')
       tdDate.setAttribute('data-label', 'Date')
       tdDate.textContent = t.date
-      
+
       const tdDelete = document.createElement('td')
       tdDelete.setAttribute('data-label', 'Delete')
       const deleteBtn = document.createElement('button')
       deleteBtn.textContent = 'Delete'
       deleteBtn.onclick = () => deleteTransaction(index)
       tdDelete.appendChild(deleteBtn)
-      
+
       tr.appendChild(tdType)
       tr.appendChild(tdCategory)
       tr.appendChild(tdDescription)

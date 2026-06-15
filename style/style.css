@@ -55,10 +55,6 @@ h1 {
   flex-direction: column;
 }
 
-.input-section > #add-btn {
-  grid-column: 1 / -1;
-  justify-self: center;
-}
 
 .input-section label {
   margin-bottom: 6px;
@@ -185,6 +181,11 @@ h1 {
   transform: translateY(0);
 }
 
+.input-section > #add-btn {
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+
 .filters {
   display: flex;
   justify-content: center;
@@ -280,16 +281,16 @@ h1 {
   transform: scale(1.005);
 }
 
+.expenses-list td {
+  padding: 15px;
+  font-size: 0.95rem;
+}
+
 .expenses-list tfoot td {
   font-weight: 700;
   background-color: #f8f9fa;
   padding: 15px;
   border-top: 2px solid #4a69bd;
-}
-
-.expenses-list td {
-  padding: 15px;
-  font-size: 0.95rem;
 }
 
 .expenses-list td button {
@@ -337,7 +338,8 @@ h1 {
     font-size: 0.8rem;
   }
 
-  #expense-chart, .expenses-list {
+  #expense-chart,
+  .expenses-list {
     padding: 20px;
   }
 
@@ -356,7 +358,7 @@ h1 {
     padding: 15px;
     border-radius: 10px;
     background: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 5%);
   }
 
   .expenses-list tbody tr:last-child {
