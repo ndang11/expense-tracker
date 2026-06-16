@@ -1,14 +1,10 @@
 # Expense Tracker App
 
  A simple web application to track daily expenses and income with visualizations.
-
-
-# Problem Statement
+## Problem Statement
 
 Many individuals struggle to manage their personal finances effectively, often losing track of where their money goes. This application provides a simple way to record transactions, categorize them, and visualize spending patterns.
-
-
-# Project Goals
+## Project Goals
 
 - Allow users to add expenses and income
 - Categorize transactions for better organization
@@ -17,9 +13,7 @@ Many individuals struggle to manage their personal finances effectively, often l
 - Provide filtering options (all, income, expense)
 - Store data in the browser (localStorage) for persistence
 
-
-
-# Tech Stack
+## Tech Stack
 
 **Frontend:**  
 - HTML5  
@@ -29,9 +23,7 @@ Many individuals struggle to manage their personal finances effectively, often l
 
 **Other Tools:**  
 - Git & GitHub  
-
-
-# Features
+## Features
 
 - Add transactions with type (expense/income), category, amount, and date
 - View all transactions in a table
@@ -41,9 +33,7 @@ Many individuals struggle to manage their personal finances effectively, often l
 - Delete transactions
 - Responsive design for mobile and desktop
 - Data persistence using localStorage
-
-
-# Installation & Setup
+## Installation & Setup
 
 Clone the repository:
 
@@ -52,16 +42,14 @@ git clone git@github.com:ndang11/expense-tracker.git
 cd expense-tracker
 ```
 
-# Challenges Faced
+## Challenges Faced
 
 - Implementing data persistence with localStorage
 - Calculating and updating totals dynamically
 - Integrating Chart.js for data visualization
 - Ensuring responsive design across different screen sizes
 - Handling form validation and user input
-
-
-# What I Learned
+## What I Learned
 
 - DOM manipulation with vanilla JavaScript
 - Using Chart.js for data visualization
@@ -71,7 +59,7 @@ cd expense-tracker
 
 ---
 
-# Future Improvements
+## Future Improvements
 
 - Add editing capability for transactions
 - Implement data export (CSV/PDF)
@@ -79,12 +67,10 @@ cd expense-tracker
 - Implement user accounts with authentication (using Firebase or similar)
 - Add budget setting and alerts
 - Improve UI/UX with animations and better feedback
+## Author
 
+NDANG-KAH A
 
-# Author
-
-NDANG-KAH A 
-
- LinkedIn:https://www.linkedin.com/in/ndang-kah-ambei-250892379/
- Email: ndangkahambei@email.com  
+ [LinkedIn Profile](https://www.linkedin.com/in/ndang-kah-ambei-250892379/)
+ Email: ndangkahambei@email.com
  Based in Cameroon | Open to remote opportunities

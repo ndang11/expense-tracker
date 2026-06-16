@@ -55,7 +55,6 @@ h1 {
   flex-direction: column;
 }
 
-
 .input-section label {
   margin-bottom: 6px;
   font-weight: 600;
@@ -428,7 +427,8 @@ h1 {
     padding: 10px 20px;
   }
 
-  #expense-chart, .expenses-list {
+  #expense-chart,
+  .expenses-list {
     padding: 15px;
   }
 
